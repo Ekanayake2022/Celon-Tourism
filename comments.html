@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comments - Tourism</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <img class="logo" src="img/IMG-20230721-WA0011.jpg" alt="logo">
+        </li>
+        <li><a href="index.html" class="btnHome">Home</a></li>
+        <li><a href="comments.html">Comments</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sitemap.html">Site Map</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="group.html">Group</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Leave Your Comments</h1>
+    <form>
+      <div class="form-group">        
+          <label for="rating">How satisfied were you with our website today?</label>
+          <div class="radio-group">
+            <input type="radio" id="rating0" name="rating" value="0" >
+            <label for="rating0">0</label>
+            <input type="radio" id="rating1" name="rating" value="1">
+            <label for="rating1">1</label>
+            <input type="radio" id="rating2" name="rating" value="2">
+            <label for="rating2">2</label>
+            <input type="radio" id="rating3" name="rating" value="3">
+            <label for="rating3">3</label>
+            <input type="radio" id="rating4" name="rating" value="4">
+            <label for="rating4">4</label>
+            <input type="radio" id="rating5" name="rating" value="5">
+            <label for="rating5">5</label>
+            <input type="radio" id="rating6" name="rating" value="6">
+            <label for="rating6">6</label>
+            <input type="radio" id="rating7" name="rating" value="7">
+            <label for="rating7">7</label>
+            <input type="radio" id="rating8" name="rating" value="8">
+            <label for="rating8">8</label>
+            <input type="radio" id="rating9" name="rating" value="9">
+            <label for="rating9">9</label>
+            <input type="radio" id="rating10" name="rating" value="10">
+            <label for="rating10">10</label>
+            <span class="error">This field is required.</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="form-group">
+        <label for="reasons">Please tell us your reasons for giving this rating:</label>
+        <textarea id="reasons" name="reasons"></textarea>
+        <span class="error">This field is required.</span>
+      </div>
+      <div class="form-group">
+        <label for="completion-method">How did you want to complete this task today?</label>
+        <select id="completion-method" name="completion-method">
+          <option value="" selected disabled>Please Select</option>
+          <option value="Phone">Phone</option>
+          <option value="Website">Website</option>
+          <option value="Social media">Social media</option>
+          <option value="Email">Email</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="preference">If you had to complete this task again, how would you prefer to do it?</label>
+        <select id="preference" name="preference">
+          <option value="" selected disabled>Please Select</option>
+          <option value="Phone">Phone</option>
+          <option value="Website">Website</option>
+          <option value="Social media">Social media</option>
+          <option value="Email">Email</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </main>  
+
+  <footer>
+    <p>Designed by: <a href="page_editor.html">Your Name</a></p>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      const ratingInputs = document.querySelectorAll('input[name="rating"]');
+      const reasonsInput = document.getElementById('reasons');
+      const completionMethodInput = document.getElementById('completion-method');
+      const preferenceInput = document.getElementById('preference');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!validateForm()) {
+          return;
+        }
+        window.location = "mailto:feedback@Tourism.com";
+        // Redirect to thankyou.html
+        window.location.href = 'thankyou.html';
+      });
+
+      function validateForm() {
+        let isValid = true;
+        const errorMessages = document.querySelectorAll('.error');
+
+        // Reset error messages
+        errorMessages.forEach((errorMessage) => {
+          errorMessage.style.display = 'none';
+        });
+
+        // Validate rating
+        let isRatingSelected = false;
+        ratingInputs.forEach((ratingInput) => {
+          if (ratingInput.checked) {
+            isRatingSelected = true;
+          }
+        });
+        if (!isRatingSelected) {
+          displayErrorMessage(ratingInputs[0], 'Please select a rating.');
+          isValid = false;
+        }
+
+        // Validate reasons
+        if (reasonsInput.value.trim() === '') {
+          displayErrorMessage(reasonsInput, 'This field is required.');
+          isValid = false;
+        }        
+
+        return isValid;
+      }
+
+      function displayErrorMessage(element, message) {
+        const errorElement = element.parentElement.querySelector('.error');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

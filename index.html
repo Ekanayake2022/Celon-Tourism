@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Presentation</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #presentation-page {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      justify-content: center;
+    }
+
+    li {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    li img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .loading-animation {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #333;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="presentation-page">
+    <h1>Welcome to our Group Presentation!</h1>
+    <br>
+    <h2>Group Members:</h2>
+    <br>
+    <ul>
+      <li>
+        <img src="img/student1.jpg" alt="Student 1">
+        E.M.G.W.C.M.B Weerasekara
+      </li>
+      <li>
+        <img src="img/student2.jpg" alt="Student 2">
+        Vishwa
+      </li>
+      <li>
+        <img src="img/student3.jpg" alt="Student 3">
+        A.H.M.U S Bandara
+      </li>
+      <li>
+        <img src="img/student4.jpg" alt="Student 4">
+        T.G Hansala Madushani
+      </li>
+    </ul>
+    <br>
+    <div class="loading-animation"></div>
+  </div>
+
+  <script>
+    setTimeout(function() {
+      window.location.href = "main.html";
+    }, 4000);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .card {
+      width: 200px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin: 0 10px 0 10px;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card h2,
+    .card p {
+      margin: 10px 0;
+    }
+
+    .hide{
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <img class="logo" src="img/IMG-20230721-WA0011.jpg" alt="logo">
+        </li>
+        <li><a href="index.html" class="btnHome">Home</a></li>
+        <li><a href="comments.html">Comments</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sitemap.html">Site Map</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="group.html">Group</a></li>
+       
+      </ul>
+    </nav>
+
+    <div class="options">
+      <div class="color-select-container">
+        <ul class="color-select">
+          <li><button class="color-option btn_default" value="default"></button></li>
+          <li><button class="color-option btn_blue" value="blue"></button></li>
+          <li><button class="color-option btn_green" value="green"></button></li>
+          <li><button class="color-option btn_random randomize-button" value="random">R</button></li>
+        </ul>
+        <div class="button-container-fonts">
+          <button class="font-size-button small" data-size="small">A</button>
+          <button class="font-size-button medium" data-size="medium">A</button>
+          <button class="font-size-button large" data-size="large">A</button>
+        </div>
+      </div>      
+    </div>
+  </header>
+
+  <h1 class="heading_center">Image Gallery</h1>
+  <main>
+    <div class="image-gallery">
+      <div class="image-row">
+        <div class="card">
+          <img src="img/9arch.JPG" alt="Image 1">
+          <h2 class="hide">Nine Archs Bridge Ella</h2>
+          <p class="hide">As of my last update in September 2021, there is no well-known bridge called the "9 Arches Bridge" in Ella. However, there is a famous tourist attraction called the "Nine Arch Bridge" in Ella, Sri Lanka.
+
+            The Nine Arch Bridge is a magnificent architectural marvel located in the picturesque town of Ella, nestled amidst the lush green hills of Sri Lanka's central highlands. This iconic bridge is known for its stunning design and the beautiful natural scenery that surrounds it.
+            
+            Built during the British colonial era, the Nine Arch Bridge stands as a testament to the engineering expertise of that time. The bridge spans a deep gorge and is made up of nine distinct arches, hence its name. It is constructed entirely of bricks, stones, and cement, blending seamlessly with the surrounding landscape.
+            
+            Today, the Nine Arch Bridge is not just a functional railway bridge but has also become a major tourist attraction. Visitors from around the world come to Ella to witness the scenic beauty and marvel at the impressive engineering feat. Tourists often gather near the bridge to watch the passing trains, which add a touch of nostalgia and charm to the entire experience.
+            
+            The area surrounding the bridge offers numerous vantage points, allowing visitors to capture breathtaking photographs of the bridge against the backdrop of the verdant hills and tea plantations. It has become a popular spot for nature lovers, photographers, and travelers seeking a unique and tranquil experience in Sri Lanka's highlands.
+            
+            Please note that there might have been changes or developments related to this attraction after my last update, so I recommend checking more recent sources for the latest information on the Nine Arch Bridge in Ella, Sri Lanka.
+            </p>
+        </div>
+        <div class="card">
+          <img src="img/Udawalawa2.JPG" alt="Image 1">
+          <h2 class="hide">Udawalawa National Park</h2>
+          <p class="hide">Udawalawe National Park in southern Sri Lanka is a haven for wildlife enthusiasts. Spanning vast grasslands, forests, and marshes, the park is renowned for its diverse ecosystem and the chance to observe majestic animals. The park's main attraction is its thriving population of wild elephants, offering incredible encounters during exhilarating jeep safaris. Visitors can also spot other wildlife like deer, buffalo, crocodiles, and a wide variety of birds. The park's picturesque landscapes provide a stunning backdrop for photography and relaxation. With well-maintained facilities and knowledgeable guides, Udawalawe National Park guarantees an unforgettable wildlife safari experience for nature lovers exploring Sri Lanka.</p>
+        </div>
+        <div class="card">
+          <img src="img/Mirissa.JPG" alt="Image 1">
+          <h2 class="hide">Mirissa</h2>
+          <p class="hide">Mirissa, a coastal gem on the southern coast of Sri Lanka, is a tropical paradise for beach lovers and water enthusiasts. With its pristine golden beaches, turquoise waters, and palm-fringed shores, Mirissa offers a serene and idyllic escape. Travelers can unwind on the sandy beaches, bask in the warm sun, and take refreshing dips in the ocean. Mirissa is also renowned for its vibrant whale watching opportunities, where visitors can embark on thrilling boat tours to witness majestic blue whales and dolphins in their natural habitat. The town's laid-back atmosphere, delicious seafood, and stunning sunsets make it a must-visit destination for those seeking relaxation and natural beauty.</p>
+        </div>
+        <div class="card">
+          <img src="img/daladamaligawa.JPG" alt="Image 1">
+          <h2 class="hide">Sri Dalada Maligawa</h2>
+          <p class="hide">Sri Dalada Maligawa, also known as the Temple of the Sacred Tooth Relic, is a revered Buddhist temple located in Kandy, Sri Lanka. It houses the sacred tooth relic of Lord Buddha, making it one of the most sacred sites for Buddhists worldwide. The temple complex showcases impressive architecture with intricate carvings and beautiful paintings. Visitors can witness the daily rituals and pay their respects to the tooth relic during the puja ceremonies. The temple is also a cultural hub, hosting vibrant festivals such as the Esala Perahera, a grand procession featuring traditional dancers, drummers, and adorned elephants. Sri Dalada Maligawa is a significant pilgrimage site and a must-visit for its historical and spiritual importance.</p>
+        </div>
+        <div class="card">
+          <img src="img/Ambuluwawa2.JPG" alt="Image 1">
+          <h2 class="hide">Ambuluwawa</h2>
+          <p class="hide">Ambuluwawa Tower, nestled in the lush greenery of Gampola, Sri Lanka, is a remarkable tourist attraction that combines natural beauty, spirituality, and breathtaking panoramic views. Standing tall at 48 meters, this iconic tower offers visitors a unique vantage point to admire the surrounding landscapes, including mist-covered mountains, sprawling tea estates, and picturesque valleys. The tower is part of the Ambuluwawa Biodiversity Complex, which also encompasses beautifully landscaped gardens, meditation centers, and religious monuments. Visitors can explore the complex, take a leisurely walk through the gardens, and soak in the serene atmosphere while enjoying the awe-inspiring vistas from the top of Ambuluwawa Tower</p>
+        </div>
+      </div>      
+    </div>
+    <div class="selected-image-container" id="SelectedImageContainer" style="display: block;">
+      <img class="selected-image" src="img/9arch.JPG" alt="Selected Image">
+      <div class="description">
+        <h2>Nine Archs Bridge Ella</h2>
+        <p>As of my last update in September 2021, there is no well-known bridge called the "9 Arches Bridge" in Ella. However, there is a famous tourist attraction called the "Nine Arch Bridge" in Ella, Sri Lanka.
+
+          The Nine Arch Bridge is a magnificent architectural marvel located in the picturesque town of Ella, nestled amidst the lush green hills of Sri Lanka's central highlands. This iconic bridge is known for its stunning design and the beautiful natural scenery that surrounds it.
+          
+          Built during the British colonial era, the Nine Arch Bridge stands as a testament to the engineering expertise of that time. The bridge spans a deep gorge and is made up of nine distinct arches, hence its name. It is constructed entirely of bricks, stones, and cement, blending seamlessly with the surrounding landscape.
+          
+          Today, the Nine Arch Bridge is not just a functional railway bridge but has also become a major tourist attraction. Visitors from around the world come to Ella to witness the scenic beauty and marvel at the impressive engineering feat. Tourists often gather near the bridge to watch the passing trains, which add a touch of nostalgia and charm to the entire experience.
+          
+          The area surrounding the bridge offers numerous vantage points, allowing visitors to capture breathtaking photographs of the bridge against the backdrop of the verdant hills and tea plantations. It has become a popular spot for nature lovers, photographers, and travelers seeking a unique and tranquil experience in Sri Lanka's highlands.
+          
+          Please note that there might have been changes or developments related to this attraction after my last update, so I recommend checking more recent sources for the latest information on the Nine Arch Bridge in Ella, Sri Lanka.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    
+    // Color Scheme Change
+    const colorSelect = document.querySelector('.color-select');
+    const colorOptions = document.querySelectorAll('.color-option');
+    const body = document.body;
+
+    colorOptions.forEach(colorOption => {
+      colorOption.addEventListener('click', () => {
+        const selectedColor = colorOption.value;
+
+        body.removeAttribute('class');
+        body.removeAttribute('style');
+        body.classList.add(selectedColor);
+      });
+    });
+
+    // Image Gallery
+    const rows = document.querySelectorAll('.image-row');
+    const selectedImage = document.querySelector('.selected-image');
+    const imageTitle = document.querySelector('.selected-image-container .description h2');
+
+    rows.forEach(row => {
+      const cards = row.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          document.getElementById("SelectedImageContainer").style.display = "block";
+          const imgSrc = card.querySelector('img').src;
+          const imgAlt = card.querySelector('img').alt;
+          const title = card.querySelector('h2').textContent;
+          const description = card.querySelector('p').textContent;
+
+          selectedImage.src = imgSrc;
+          selectedImage.alt = imgAlt;
+          imageTitle.textContent = title;
+
+          const descriptionContainer = document.querySelector('.selected-image-container .description');
+          descriptionContainer.innerHTML = '';
+          const descriptionHeading = document.createElement('h2');
+          descriptionHeading.textContent = title;
+          const descriptionText = document.createElement('p');
+          descriptionText.textContent = description;
+          descriptionContainer.appendChild(descriptionHeading);
+          descriptionContainer.appendChild(descriptionText);
+        });
+      });
+    });
+
+    // Font Size Change
+    const fontButtons = document.querySelectorAll('.font-size-button');
+
+    fontButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedFontSize = button.dataset.size;
+        document.body.style.fontSize = selectedFontSize;
+      });
+    });
+
+    function getRandomColor() {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    var randomizeButton = document.querySelector(".randomize-button");
+    randomizeButton.addEventListener("click", function () {
+      var randomColor = getRandomColor();
+      document.body.style.backgroundColor = randomColor;
+    });
+
+  </script>
+  <footer>
+    <p>Designed by: <a href="student4.html">Hansala Gamage</a></p>
+  </footer>
+</body>
+
+</html>

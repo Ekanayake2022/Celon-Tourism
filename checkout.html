@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Tourism</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <img class="logo" src="img/IMG-20230721-WA0011.jpg" alt="logo">
+        </li>
+        <li><a href="index.html" class="btnHome">Home</a></li>
+        <li><a href="comments.html">Comments</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sitemap.html">Site Map</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="group.html">Group</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Checkout</h1>
+    <div class="container-block">
+      <div class="form-section">
+        <h2>Order Summary</h2>
+        <div id="order-summary-container"></div>
+      </div>
+      <div class="form-section">
+        <h2>Payment Details</h2>
+        <label for="fname">Accepted Cards</label>
+        <div class="icon-container">
+          <i class="fa fa-cc-amex" style="color:blue;"></i>
+          <i class="fa fa-cc-mastercard" style="color:red;"></i>
+        </div>
+        <form id="payment-form">
+          <div class="form-group">
+            <label for="card-number">Card Number<span class="mandatory">*</span></label>
+            <input type="text" id="card-number" required >
+            <div class="error-message" id="card-number-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="expiry-date">Expiry Date<span class="mandatory">*</span></label>
+            <input type="text" id="expiry-date" required value="dd/mm/yyyy" >
+            <div class="error-message" id="expiry-date-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="cardholder-name">Cardholder's Name<span class="mandatory">*</span></label>
+            <input type="text" id="cardholder-name" required>
+            <div class="error-message" id="cardholder-name-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="security-code">Security Code<span class="mandatory">*</span></label>
+            <input type="text" id="security-code" required>
+            <div class="error-message" id="security-code-error"></div>
+          </div>
+        </form>
+      </div>
+      <div class="form-section">
+        <h2>Billing Address</h2>
+        <form id="billing-address-form">
+          <div class="form-group">
+            <label for="address1">Address 1<span class="mandatory">*</span></label>
+            <input type="text" id="address1" required>
+            <div class="error-message" id="address1-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="address2">Address 2</label>
+            <input type="text" id="address2">
+          </div>
+          <div class="form-group">
+            <label for="address3">Address 3</label>
+            <input type="text" id="address3">
+          </div>
+          <div class="form-group">
+            <label for="town-city">Town/City<span class="mandatory">*</span></label>
+            <input type="text" id="town-city" required>
+            <div class="error-message" id="town-city-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="state-region">State/Region<span class="mandatory">*</span></label>
+            <input type="text" id="state-region" required>
+            <div class="error-message" id="state-region-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="postcode">Postcode/Zip Code<span class="mandatory">*</span></label>
+            <input type="text" id="postcode" required>
+            <div class="error-message" id="postcode-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="country">Country<span class="mandatory">*</span></label>
+            <input type="text" id="country" required>
+            <div class="error-message" id="country-error"></div>
+          </div>
+        </form>
+      </div>
+      <div class="form-section">
+        <h2>Contact Details</h2>
+        <form id="contact-details-form">
+          <div class="form-group">
+            <label for="phone-number">Phone Number</label>
+            <input type="text" id="phone-number">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email">
+            <div class="error-message" id="email-error"></div>
+          </div>
+        </form>
+      </div>
+      <div class="buttons">
+        <button id="cancel-button">Cancel</button>
+        <button id="payment-button" onclick="handlePayment()">Make Payment</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" id="close-button">&times;</span>
+      <h3>Payment Successful!</h3>
+      <p>Your payment has been successfully processed.</p>
+      <button id="ok-button">OK</button>
+    </div>
+  </div>
+
+
+  <footer>
+    <p>Designed by: <a href="page_editor.html">Your Name</a></p>
+  </footer>
+
+  <script>
+    // Handle form submission
+    function handlePayment() {
+      const isFormValid = validateForm();
+      if (isFormValid) {
+        // Perform payment processing logic
+        showPaymentSuccessPopup();
+      }
+    }
+
+    function validateForm() {
+      let isValid = true;
+      const mandatoryFields = document.querySelectorAll('.mandatory');
+      mandatoryFields.forEach((field) => {
+        const formGroup = field.parentElement;
+        const input = formGroup.querySelector('input');
+        if (input && !input.value.trim()) {
+          formGroup.classList.add('error');
+          isValid = false;
+        } else {
+          formGroup.classList.remove('error');
+        }
+      });
+      return isValid;
+    }
+
+    // Function to show the payment success popup
+    function showPaymentSuccessPopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
+
+        const closeButton = document.getElementById('close-button');
+        closeButton.addEventListener('click', () => {
+          popup.style.display = 'none';
+          // Redirect to shop.html after clicking "OK" on the popup
+          window.location.href = 'shop.html';
+        });
+
+        const okButton = document.getElementById('ok-button');
+        okButton.addEventListener('click', () => {
+          popup.style.display = 'none';
+          // Redirect to shop.html after clicking "OK" on the popup
+          window.location.href = 'shop.html';
+        });
+      }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const orderSummaryContainer = document.getElementById('order-summary-container');
+      const paymentForm = document.getElementById('payment-form');
+      const billingAddressForm = document.getElementById('billing-address-form');
+      const contactDetailsForm = document.getElementById('contact-details-form');
+      const emailValue = sessionStorage.getItem('email');
+      const emailInput = document.getElementById('email');
+      const cancelButton = document.getElementById('cancel-button');
+      const paymentButton = document.getElementById('payment-button');
+      const popup = document.getElementById('popup');
+      const okButton = document.getElementById('ok-button');
+
+      emailInput.value = emailValue;
+
+      // Retrieve order details from sessionStorage
+      const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+
+      // Display order summary
+      const orderSummaryList = document.createElement('ul');
+      orderDetails.items.forEach((item) => {
+        const orderSummaryItem = document.createElement('li');
+        orderSummaryItem.textContent = `${item.quantity}x ${item.itemName} - $${item.price}`;
+        orderSummaryList.appendChild(orderSummaryItem);
+      });
+      orderSummaryContainer.appendChild(orderSummaryList);
+
+
+
+
+      
+
+
+      // Close the popup and redirect to shop.html on "OK" button click
+      okButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+        window.location.href = 'shop.html';
+      });
+
+      // Handle form cancellations
+      cancelButton.addEventListener('click', () => {
+        const confirmCancel = confirm('Are you sure you want to cancel the payment?');
+        if (confirmCancel) {
+          window.location.href = 'shop.html';
+        }
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

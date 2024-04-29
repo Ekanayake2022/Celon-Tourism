@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <img class="logo" src="img/IMG-20230721-WA0011.jpg" alt="logo">
+        </li>
+        <li><a href="index.html" class="btnHome">Home</a></li>
+        <li><a href="comments.html">Comments</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sitemap.html">Site Map</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="group.html">Group</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Shop</h1>
+    <div class="container">
+      <div class="left-column">
+        <div class="items-container">
+          <div class="item">
+            <img src="img/item1.webp" alt="Item 1">
+            <h2>Item 1</h2>
+            <p>Price: $10</p>
+            <select class="quantity-select" data-price="10">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="item">
+            <img src="img/item2.webp" alt="Item 2">
+            <h2>Item 2</h2>
+            <p>Price: $15</p>
+            <select class="quantity-select" data-price="15">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="item">
+            <img src="img/item3.webp" alt="Item 3">
+            <h2>Item 3</h2>
+            <p>Price: $20</p>
+            <select class="quantity-select" data-price="20">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="cart-container">
+          <h2>Your Order:</h2>
+          <div class="cart" id="cart">
+            <p>Basket</p>
+            <ul id="item-list"></ul>
+            <p>Express Delivery: <span id="delivery">$0</span></p>
+            <p>Total: $<span id="total">0</span></p>
+          </div>
+        </div>
+        <div class="checkout-container">
+          <div class="row">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+          </div>
+          <div class="row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+          </div>
+          <div class="row">
+            <label for="express-delivery">Express Delivery:</label>
+            <input type="checkbox" id="express-delivery" class="checkbox-left">
+          </div>
+          <div class="cart-buttons">
+            <button id="clear-cart" disabled>Clear Order</button>
+            <button id="place-order" disabled>Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Designed by: <a href="student1.html">Chamara Weerasekara</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const quantitySelects = document.querySelectorAll('.quantity-select');
+      const itemList = document.getElementById('item-list');
+      const deliveryElement = document.getElementById('delivery');
+      const totalElement = document.getElementById('total');
+      const clearCartButton = document.getElementById('clear-cart');
+      const placeOrderButton = document.getElementById('place-order');
+      const expressDeliveryCheckbox = document.getElementById('express-delivery');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+
+      // Add event listener to quantity selects
+      quantitySelects.forEach((select) => {
+        select.addEventListener('change', updateCart);
+      });
+
+      // Add event listener to express delivery checkbox
+      expressDeliveryCheckbox.addEventListener('change', updateCart);
+
+      // Add event listener to clear cart button
+      clearCartButton.addEventListener('click', clearCart);
+
+      // Add event listener to place order button
+      placeOrderButton.addEventListener('click', placeOrder);
+
+      // Function to update the cart
+      function updateCart() {
+        // Clear the cart
+        itemList.innerHTML = '';
+        let total = 0;
+
+        // Iterate over quantity selects
+        quantitySelects.forEach((select) => {
+          const quantity = parseInt(select.value);
+          const price = parseInt(select.dataset.price);
+
+          if (quantity > 0) {
+            // Create list item in the cart
+            const listItem = document.createElement('li');
+            listItem.textContent = `${quantity}x ${select.parentElement.querySelector('h2').textContent} = $${quantity * price}`;
+            itemList.appendChild(listItem);
+
+            // Update total
+            total += quantity * price;
+          }
+        });
+
+        // Check if any items in the cart
+        if (total > 0) {
+          clearCartButton.disabled = false;
+          placeOrderButton.disabled = false;
+        } else {
+          clearCartButton.disabled = true;
+          placeOrderButton.disabled = true;
+        }
+
+        // Update total and delivery
+        const expressDeliveryCost = expressDeliveryCheckbox.checked ? 20 : 0;
+        const orderTotal = total + expressDeliveryCost;
+        deliveryElement.textContent = `$${expressDeliveryCost}`;
+        totalElement.textContent = `${orderTotal}`;
+      }
+
+      // Function to clear the cart
+      function clearCart() {
+        quantitySelects.forEach((select) => {
+          select.value = 0;
+        });
+        updateCart();
+      }
+
+      // Function to place the order
+      function placeOrder() {
+        const orderDetails = {
+          items: [],
+          expressDelivery: expressDeliveryCheckbox.checked,
+          name: nameInput.value,
+          email: emailInput.value,
+          total: totalElement.textContent
+        };
+
+        // Retrieve selected items
+        quantitySelects.forEach((select) => {
+          const quantity = parseInt(select.value);
+          const price = parseInt(select.dataset.price);
+          const itemName = select.parentElement.querySelector('h2').textContent;
+
+          if (quantity > 0) {
+            orderDetails.items.push({
+              quantity: quantity,
+              itemName: itemName,
+              price: price
+            });
+          }
+        });
+
+        // Store orderDetails object in sessionStorage
+        sessionStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+        sessionStorage.setItem('email', emailInput.value);
+
+        // Redirect to the checkout page
+        window.location.href = 'checkout.html';
+      }
+    });
+  </script>
+</body>
+
+</html>

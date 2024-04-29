@@ -1,0 +1,234 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Women's Wear</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <img class="logo" src="img/IMG-20230721-WA0011.jpg" alt="logo">
+        </li>
+        <li><a href="index.html" class="btnHome">Home</a></li>
+        <li><a href="comments.html">Comments</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sitemap.html">Site Map</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="group.html">Group</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Quiz</h1>
+      <div id="quiz-container" class="quiz-container">
+        <div id="quiz-card" class="quiz-card">          
+          <div class="quiz-number" id="quiz-number">Question 1/10 </div><div class="timer" id="timer">60s</div>
+          <h2 class="question">Question 1:</h2>
+          <div class="answers">
+            <button class="answer">Answer 1</button>
+            <button class="answer">Answer 2</button>
+            <button class="answer">Answer 3</button>
+            <button class="answer">Answer 4</button>
+          </div>
+          <button class="next-btn quiz-nxt-btn" id="next-btn">Next</button>
+        </div>
+      </div>
+</main>
+  <div id="popup-container" class="popup-container">
+    <div id="popup" class="popup-quiz">
+      <h2>Congratulations, Quiz Completed!</h2>
+      <p>Questions: <span id="total-questions"></span></p>
+      <p>Wrong Answers: <span id="wrong-answers"></span></p>
+      <p>Score: <span id="score"></span></p>
+      <p>Grade: <span id="grade"></span></p>
+      <p>You took <span id="quiz-time"></span></p>
+      <button id="start-again-btn" class="start-again-btn">Start Again</button>
+    </div>
+  </div>
+  <footer>
+    <p>Designed by: <a href="student3.html">Upeksha Sandamini</a></p>
+  </footer>
+</body>
+<script>
+    const quizData = [
+  { question: "What are the official languages of Sri Lanka?", answers: ["Sinhala and Tamil", "English", "Hindi", "Arabic"], correctAnswer: 0 },
+  { question: "Name a popular tourist attraction in Sri Lanka.", answers: ["One Galleface", "Sigiriya", "Water world", "Port City"], correctAnswer: 1 },
+  { question: "What is the currency of Sri Lanka?", answers: ["Doller", "Pounds", "Rupee", "Pesos"], correctAnswer: 2 },
+  { question: "When is the best time to visit Sri Lanka?", answers: ["March-June", "June-September", "September-December", "December-March"], correctAnswer: 3 },
+  { question: "Name a famous beach in Sri Lanka?", answers: ["Mirissa", "Chillaw", "Panama", "Bopitiya"], correctAnswer: 0 },
+  { question: "What is Sri Lanka famous for in terms of wildlife?", answers: ["Rabbits", "Elephants", "Dear", "Horse"], correctAnswer: 1 },
+  { question: "Name a traditional dish in Sri Lanka?", answers: ["Kottu", "Hoppers", "Rice and curry", "Fried Rice"], correctAnswer: 2 },
+  { question: "How many UNESCO World Heritage sites does Sri Lanka have?", answers: ["Four", "Five", "Seven", "Eight"], correctAnswer: 3 },
+  { question: "Can you visit tea plantations in Sri Lanka?", answers: ["Yes", "No"], correctAnswer: 0 },
+  { question: "What is the capital city of Sri Lanka?", answers: ["Kandy", "Colombo", "Galle", "Jaffna"], correctAnswer: 1 },
+];
+let currentQuestion = 0;
+let score = 0;
+let wrongAnswers = 0;
+let quizTime = 0;
+let timerInterval;
+
+const quizContainer = document.getElementById("quiz-container");
+const quizCard = document.getElementById("quiz-card");
+const timer = document.getElementById("timer");
+const quizNumber = document.getElementById("quiz-number");
+const answers = document.querySelectorAll(".answer");
+const nextBtn = document.getElementById("next-btn");
+const popupContainer = document.getElementById("popup-container");
+
+// Display the current question
+function displayQuestion() {
+  const question = quizData[currentQuestion];
+  quizNumber.textContent = `Question ${currentQuestion + 1}/${quizData.length}`;
+  document.querySelector(".question").textContent = question.question;
+  answers.forEach((button, index) => {
+    button.textContent = question.answers[index];
+    button.classList.remove("correct", "incorrect", "locked");
+    button.disabled = false;
+  });
+  nextBtn.disabled = true;
+}
+
+// Add a variable to track if the quiz is completed
+let quizCompleted = false;
+
+// Function to show the popup
+function showPopup() {
+  const popupContainer = document.getElementById("popup-container");
+  popupContainer.classList.add("show");
+}
+
+// Function to hide the popup
+function hidePopup() {
+  const popupContainer = document.getElementById("popup-container");
+  popupContainer.classList.remove("show");
+}
+
+// Function to handle the "Start Again" button click
+function startAgain() {
+  hidePopup();
+  currentQuestion = 0;
+  score = 0;
+  wrongAnswers = 0;
+  quizTime = 0;
+  displayQuestion();
+  startTimer(60);
+}
+
+// Event listener for the "Start Again" button
+document.getElementById("start-again-btn").addEventListener("click", startAgain);
+
+// Function to finish the quiz
+function finishQuiz() {
+  clearInterval(timerInterval);
+  quizCompleted = true;
+  const totalQuestions = quizData.length;
+  const grade = ((score / totalQuestions) * 100).toFixed(0);
+
+  document.getElementById("total-questions").textContent = totalQuestions;
+  document.getElementById("wrong-answers").textContent = wrongAnswers;
+  document.getElementById("score").textContent = score;
+  document.getElementById("grade").textContent = `${grade}%`;
+  document.getElementById("quiz-time").textContent = `${quizTime}s`;
+
+  showPopup();
+}
+
+// Start the timer
+function startTimer(duration) {
+  let time = duration;
+  timer.textContent = `${time}s`;
+  timerInterval = setInterval(() => {
+    time--;
+    timer.textContent = `${time}s`;
+    quizTime++;
+    if (time <= 0) {
+      clearInterval(timerInterval);
+      finishQuiz();
+    }
+    if (time === 0) {
+      showPopupContainer();
+    }
+  }, 1000);
+}
+
+function showPopupContainer() {
+  clearInterval(timerInterval);
+  const popupContainer = document.getElementById("popup-container");
+  popupContainer.style.display = "flex";
+}
+
+
+// Check the chosen answer
+function checkAnswer(event) {
+  if (quizCompleted) return;
+  const chosenAnswer = event.target;
+  const question = quizData[currentQuestion];
+
+  if (chosenAnswer.textContent === question.answers[question.correctAnswer]) {
+    chosenAnswer.classList.add("correct");
+    score++;
+  } else {
+    chosenAnswer.classList.add("incorrect");
+    answers[question.correctAnswer].classList.add("correct");
+    wrongAnswers++;
+  }
+
+  answers.forEach((button) => {
+    button.disabled = true;
+    button.classList.add("locked");
+  });
+  nextBtn.disabled = false;
+  
+}
+
+// Display the popup with the quiz results
+function showQuizResults() {
+  clearInterval(timerInterval);
+
+  const totalQuestions = quizData.length;
+  const grade = ((score / totalQuestions) * 100).toFixed(0);
+
+  document.getElementById("total-questions").textContent = totalQuestions;
+  document.getElementById("wrong-answers").textContent = wrongAnswers;
+  document.getElementById("score").textContent = score;
+  document.getElementById("grade").textContent = `${grade}%`;
+  document.getElementById("quiz-time").textContent = `${quizTime}s`;
+
+  popupContainer.style.display = "flex";
+}
+
+// Restart the quiz
+function startAgain() {
+  window.location.reload();
+}
+
+// Event listeners
+answers.forEach((button) => {
+  button.addEventListener("click", checkAnswer);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    displayQuestion();
+  } else {
+    showQuizResults();
+  }
+});
+
+document.getElementById("start-again-btn").addEventListener("click", startAgain);
+
+// Start the quiz
+displayQuestion();
+startTimer(60);
+
+</script>
+</html>
